@@ -1,5 +1,5 @@
 // Internal Modules
-const employeeController = require('../../../controllers/Accounts/User/employee');
+const userController = require('../controllers/user');
 
 // 3rd Party Modules
 const express = require('express');
@@ -8,7 +8,7 @@ const express = require('express');
 const router = express.Router();
 
 // multer
-const {createEmployee} = require('../../../middleware/multer');
+const {createUserFiles} = require('../../../middleware/multer');
 
 //---------------------------------------------------// Page Break
 
