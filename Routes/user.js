@@ -8,12 +8,12 @@ const express = require('express');
 const router = express.Router();
 
 // multer
-const {createUserFiles} = require('../../../middleware/multer');
+const {createUserFiles} = require('../middleware/multer');
 
 //---------------------------------------------------// Page Break
 
 // Create new User
-router.post('/', createEmployee, employeeController.create);
+router.post('/', createUserFiles, employeeController.create);
 
 // Get all Users
 router.get('/', employeeController.get);
