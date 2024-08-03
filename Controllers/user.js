@@ -3,19 +3,14 @@ const UserService = require('../services/user');
 const GDrive = require('../clients/GoogleDriveClient');
 
 // Delarations
-const Employees = new EmployeeService();
+const Users = new UserService();
 const Drive = new GDrive();
-
-// node module
-const fs = require('fs');
-const path = require('path');
-const deleteFile = require('../../../utils/tools/deleteFile');
 
 exports.create = async (req, res, next) => {
   try {
     // create folder in google drive
     const folderName = `${req.body.name}-${req.body.phone}`; // example
-    const parent = '1Fjo2zDBfSZUY4POsQdpjNzVq99QzqODV'; // the id of parent (from url)
+    const parent = 'change to your id'; // the id of parent (from url)
     const data = await Drive.createFolder(folderName, parent);
     const folderId = data.data.id;
 
@@ -33,7 +28,7 @@ exports.create = async (req, res, next) => {
       }
     }
 
-    const result = await Employees.create(req, uploadedFiles);
+    const result = await Users.create(req, uploadedFiles);
     res.status(201).send({ success: true, message: 'User created successfully', body: result });
   } catch (err) {
     console.error(err);
