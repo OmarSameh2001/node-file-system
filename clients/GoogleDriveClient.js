@@ -6,7 +6,7 @@ class DriveClient {
   // initialize authentication
   constructor() {
     this.auth = new google.auth.GoogleAuth({
-      keyFile: './utils/credintials.json', // path to credentials (needs to be changed to mazen) and implement in .env
+      keyFile: './utils/credintials.json', // change to path of your credentials and its better to put it in .env
       scopes: 'https://www.googleapis.com/auth/drive', // mandatory scope for google drive
     });
   }
@@ -25,7 +25,7 @@ class DriveClient {
                 },
                 requestBody: {
                   name: file.originalname,
-                  parents: [folderId], // folder ID in Google Drive (dynamic for client)
+                  parents: [folderId], // parent folder
                 },
                 fields: 'id,name',
               });
@@ -49,7 +49,7 @@ class DriveClient {
       const folder = {
         name: folderName,
         mimeType: 'application/vnd.google-apps.folder',
-        parents: [parent], // parent folder (could be dynamic for each account)
+        parents: [parent], // parent folder
       };
       const  data  = drive.files.create({
         resource: folder,
