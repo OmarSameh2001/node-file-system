@@ -14,7 +14,7 @@ const deleteFile = require('../../../utils/tools/deleteFile');
 exports.create = async (req, res, next) => {
   try {
     // create folder in google drive
-    const folderName = `${req.body.name}-${req.body.number}`; // example
+    const folderName = `${req.body.name}-${req.body.phone}`; // example
     const parent = '1Fjo2zDBfSZUY4POsQdpjNzVq99QzqODV'; // the id of parent (from url)
     const data = await Drive.createFolder(folderName, parent);
     const folderId = data.data.id;
