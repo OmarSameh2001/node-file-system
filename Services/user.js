@@ -1,37 +1,30 @@
-// Model
-const Employee = require('../models/User');
-
-// Errors
-
-//---------------------------------------------------// Page Break
+const User = require('../models/User');
 
 class UserService {
   constructor() {
-    super(Employee);
+    this.UserModel = User;
   }
-  async create(newUser, uploadedFiles) {
 
+  async create(newUser, uploadedFiles) {
     let files = {};
-    
-    // Gdrive
+
     if (uploadedFiles) {
       uploadedFiles.forEach((file) => {
-        if (file.type === 'photo'){
+        if (file.type === 'photo') {
           files.photo = file.id;
         }
         if (file.type === 'idFront') {
-         files.idFront(file.id);
+          files.idFront = file.id;
         }
         if (file.type === 'idBack') {
-         files.idBack(file.id);
+          files.idBack = file.id;
         }
-      })
+      });
     }
-    
+
     newUser.body.files = files;
 
-    const result = await this.MongooseClient.create(newUser.body);
-
+    const result = await this.UserModel.create(newUser.body);
     return result;
   }
 }
