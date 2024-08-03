@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
 
 let userSchema = new mongoose.Schema({
-    name: String,
+    name: {
+    type: String,
+    required: true,
+    },
     phone: String,
     files: {
         photo: String,
