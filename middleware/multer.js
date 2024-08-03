@@ -4,50 +4,17 @@ const os = require("os");
 const multerService = new Multer();
 
 // Define employeeImage as middleware function
-const createEmployee = (req, res, next) => {
+const createUserFiles = (req, res, next) => {
   
   // (filePath, fields, filter)
   multerService.upload(
-    '/employees/images/', // should be temporary like (os.tmpdir())
+    './uploads/user/images/', // could be dynamic {`./uploads/${req.body.name}/images`} or temporary like (os.tmpdir())   
     [
       { name: 'photo', maxCount: 1 },
-      { name: 'id', maxCount: 10 },
+      { name: 'idFront', maxCount: 1 },
+      { name: 'idBack', maxCount: 1},
     ],
-    ['image/', 'application/']
-  )(req, res, err => {
-    if (err) {
-      return res.status(400).json({ error: err.message });
-    }
-    next();
-  });
-};
-const createCustomer = (req, res, next) => {
-  
-  // (filePath, fields, filter)
-  multerService.upload(
-    '/customers/images/', // should be temporary like (os.tmpdir())
-    [
-      { name: 'photo', maxCount: 1 },
-      { name: 'requests', maxCount: 10 },
-    ],
-    ['image/', 'application/']
-  )(req, res, err => {
-    if (err) {
-      return res.status(400).json({ error: err.message });
-    }
-    next();
-  });
-};
-const createOrganization = (req, res, next) => {
-  
-  // (filePath, fields, filter)
-  multerService.upload(
-    '/organizations/images/', // should be temporary like (os.tmpdir())
-    [
-      { name: 'photo', maxCount: 1 },
-      { name: 'requests', maxCount: 10 },
-    ],
-    ['image/', 'application/']
+    ['image/'] // all image types
   )(req, res, err => {
     if (err) {
       return res.status(400).json({ error: err.message });
@@ -56,4 +23,4 @@ const createOrganization = (req, res, next) => {
   });
 };
 
-module.exports = {createEmployee , createOrganization, createCustomer};
+module.exports = {createUserFiles};
