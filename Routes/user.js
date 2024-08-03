@@ -15,16 +15,4 @@ const {createUserFiles} = require('../middleware/multer');
 // Create new User
 router.post('/', createUserFiles, employeeController.create);
 
-// Get all Users
-router.get('/', employeeController.get);
-
-// Update User by Id
-router.put(
-  '/:id',
-  employeeController.updateById,
-);
-
-// get the files
-router.get('/document/:filename', employeeController.getFileByName);
-
 module.exports = router;
