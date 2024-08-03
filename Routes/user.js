@@ -13,6 +13,6 @@ const {createUserFiles} = require('../middleware/multer');
 //---------------------------------------------------// Page Break
 
 // Create new User
-router.post('/', createUserFiles, employeeController.create);
+router.post('/', createUserFiles, userController.create);
 
 module.exports = router;
