@@ -1,17 +1,16 @@
 const multer = require('multer');
-const path = require('path');
 const { format } = require('date-fns');
 const fs = require('fs');
 
 class MulterClient {
-  // initialize date and base local path (could be changed to aws)
+  // initialize date and base local path
   constructor(basePath = './upload/') {
     this.date = format(new Date(Date.now()), 'yyyy-MM-dd_HH.mm.ss').toString();
     this.basePath = basePath;
   }
 
-  // define file filter (multer options) 
-  // (ex: only images, pdf, docx, ...etc)(application/pdf)
+  // define file filer (accepted types)
+  // (ex: application/pdf, images/) = (accept pdf and all image types)
   fileFilter = (filters) => {
     return (req, file, cb) => {
       // Check if the file's MIME type matches any of the filters
@@ -27,13 +26,12 @@ class MulterClient {
   };
   
 
-  // define storage config (multer options)
-  // (ex: dynamic path: ./uploads/employees/:id/images/)(dynamic id needs new user id field deifferent from mongo index (_id))
-  // (ex: filename: 2024-07-14_16.17.19-ImageName.jpg)
+  // define storage config
+  // (ex: filepath = './uploads/users')
   storageConfig(filePath) {
     return multer.diskStorage({
       destination: (req, file, cb) => {
-        const dir = path.join(this.basePath, filePath);
+        const dir = filePath
         
         // Check if directory exists, if not, create it
         if (!fs.existsSync(dir)) {
