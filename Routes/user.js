@@ -15,4 +15,7 @@ const {createUserFiles} = require('../middleware/multer');
 // Create new User
 router.post('/', createUserFiles, userController.create);
 
+// Delete User
+router.delete('/:id', userController.delete);
+
 module.exports = router;
